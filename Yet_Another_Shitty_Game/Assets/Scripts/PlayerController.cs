@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
@@ -29,6 +30,11 @@ public class PlayerController : MonoBehaviour
 
     CharacterController gn;
 
+    private bool movingToLeft = false;
+    private bool movingToRight = false;
+    private bool fixMove = false;
+    public float timeLeft = 0.5f;
+
     // Use this for initialization
     void Start()
     {
@@ -42,23 +48,45 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timeLeft <= 0f)
+        {
+            fixMove = false;
+        }
+        if (fixMove == true)
+        {
+            timeLeft -= Time.deltaTime;
+            if (movingToLeft)
+            {
+                transform.localScale = new Vector2(1f, 1f);
+            } else
+            {
+                transform.localScale = new Vector2(-1f, 1f);
+            }
+        } else if (fixMove == false)
+        {
+            timeLeft = 0.5f;
+        }
         if (isGoofyQuestCompleted)
         {
             hasMotorOil = false;
         }
         isTouchingGround = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
         movement = Input.GetAxis("Horizontal");
-        if (isTalking == false)
+        if (isTalking == false && fixMove == false)
         {
             if (movement > 0f)
             {
                 rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
                 transform.localScale = new Vector2(1f, 1f);
+                movingToLeft = false;
+                movingToRight = true;
             }
             else if (movement < 0f)
             {
                 rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
                 transform.localScale = new Vector2(-1f, 1f);
+                movingToRight = false;
+                movingToLeft = true;
             }
             else
             {
@@ -73,7 +101,6 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown("return") && isNearCharacter)
         {
-            Debug.Log("Maxie is talking with his father!");
             isTalking = true;
         }
         if (Input.GetKeyDown("backspace") && isTalking == true)
@@ -88,7 +115,6 @@ public class PlayerController : MonoBehaviour
         {
             currentMission = "Get motor oil!";
         }
-        Debug.Log("Is the player touching the ground: " + isTouchingGround);
         if (hasMotorOil)
         {
             currentMission = "Return to Goofy!";
@@ -113,6 +139,20 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Checkpoint")
         {
             respawnPoint = other.transform.position;
+        }
+        if (other.tag == "ArenaTriggers")
+        {
+            Debug.Log("Homo!");
+            if (movingToRight)
+            {
+                fixMove = true;
+                rigidBody.velocity = new Vector2((movement * speed) / -1, rigidBody.velocity.y);
+            }
+            else if (movingToLeft)
+            {
+                fixMove = true;
+                rigidBody.velocity = new Vector2((movement * speed) / -1, rigidBody.velocity.y);
+            }
         }
         if (other.gameObject.tag == "Characters")
         {

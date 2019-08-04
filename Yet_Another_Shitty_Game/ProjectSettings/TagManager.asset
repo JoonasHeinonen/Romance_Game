@@ -8,6 +8,8 @@ TagManager:
   - Checkpoint
   - Characters
   - Coin
+  - JumpTriggers
+  - ArenaTriggers
   layers:
   - Default
   - TransparentFX
@@ -47,6 +49,9 @@ TagManager:
     locked: 0
   - name: NatureLayer
     uniqueID: 2554326813
+    locked: 0
+  - name: FenceLayer
+    uniqueID: 3636408441
     locked: 0
   - name: BuildingLayer
     uniqueID: 834034237

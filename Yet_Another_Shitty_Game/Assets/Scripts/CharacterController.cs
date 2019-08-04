@@ -41,6 +41,7 @@ public class CharacterController : MonoBehaviour
         pn = GameObject.Find("Player").GetComponent<PlayerController>();
         rigidBody = GetComponent<Rigidbody2D>();
         characterAnimation = GetComponent<Animator>();
+        respawnPoint = transform.position;
     }
 
     public void setMissionComplete(int x)
@@ -62,7 +63,6 @@ public class CharacterController : MonoBehaviour
         {
             characterAnimation.SetBool("OnGround", isTouchingGround);
             characterAnimation.SetFloat("Speed", Mathf.Abs(rigidBody.velocity.x));
-            Debug.Log("Is touching the ground: " + isTouchingGround);
             isTouchingGround = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
             movement = Input.GetAxis("Horizontal");
         }
@@ -105,9 +105,27 @@ public class CharacterController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        playerPosition = new Vector3(
+            player.transform.position.x,
+            transform.position.y,
+            transform.position.z
+        );
+        characterPosition = new Vector3(
+            character.transform.position.x,
+            transform.position.y,
+            transform.position.z
+        );
         if (other.gameObject.name == "Player")
         {
             triggered = true;
+        }
+        if (other.gameObject.name == "FallDetector")
+        {
+            transform.position = respawnPoint;
+        }
+        if (other.tag == "JumpTriggers")
+        {
+            rigidBody.velocity = new Vector2(speed, jumpSpeed);
         }
     }
 
