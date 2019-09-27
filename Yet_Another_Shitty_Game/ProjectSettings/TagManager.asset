@@ -71,3 +71,6 @@ TagManager:
   - name: OverlayLayer
     uniqueID: 2455210579
     locked: 0
+  - name: VeryFrontLayer
+    uniqueID: 4128655593
+    locked: 0

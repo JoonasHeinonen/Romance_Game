@@ -27,17 +27,27 @@ public class PlayerController : MonoBehaviour
     private string currentMission;
     private bool isGoofyQuestCompleted = false;
     private bool hasMotorOil = false;
+    private bool nearBusStop = false;
+
+    public GameObject bus;
 
     CharacterController gn;
+    BusController bc;
 
     private bool movingToLeft = false;
     private bool movingToRight = false;
     private bool fixMove = false;
     public float timeLeft = 0.5f;
 
+    public bool getNearBusStop()
+    {
+        return nearBusStop;
+    }
+
     // Use this for initialization
     void Start()
     {
+        bc = GameObject.Find("Bus").GetComponent<BusController>();
         gn = GameObject.Find("Goofy").GetComponent<CharacterController>();
         rigidBody = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<Animator>();
@@ -154,6 +164,15 @@ public class PlayerController : MonoBehaviour
                 rigidBody.velocity = new Vector2((movement * speed) / -1, rigidBody.velocity.y);
             }
         }
+        if (other.gameObject.tag == "Coin")
+        {
+            money++;
+        }
+        if (other.gameObject.tag == "Characters")
+        {
+            isNearCharacter = true;
+            Debug.Log("You are near " + other.gameObject.name + "!");
+        }
         if (other.gameObject.tag == "Characters")
         {
             isNearCharacter = true;
@@ -166,11 +185,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.name == "Motor_oil")
         {
             hasMotorOil = true;
-            Debug.Log("Both methods are working!");
         }
-        if (other.gameObject.tag == "Coin")
+        if (other.gameObject.name == "Bus_Stop")
         {
-            money++;
+            nearBusStop = true;
+            Debug.Log("Is player near to bus stop: " + nearBusStop);
         }
     }
 
@@ -184,6 +203,12 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.name == "Goofy")
         {
             isNearGoofy = false;
+        }
+        if (other.gameObject.name == "Bus_Stop")
+        {
+            nearBusStop = false;
+            Debug.Log("Is player near to bus stop: " + nearBusStop);
+            bc.setSpeed(5f);
         }
     }
 

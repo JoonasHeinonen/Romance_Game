@@ -25,6 +25,7 @@ public class CheckpointController : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            SoundManagerScript.PlaySound("checkpoint");
             checkpointSpriteRenderer.sprite = reachedAutomat;
             checkpointReached = true;
         }

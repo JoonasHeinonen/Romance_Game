@@ -18,7 +18,10 @@ public class MotorOilScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("You collected the motor oil!");
-        Destroy(gameObject);
+        if (other.gameObject.name == "Player")
+        {
+            Debug.Log("You collected the motor oil!");
+            Destroy(gameObject);
+        }
     }
 }
