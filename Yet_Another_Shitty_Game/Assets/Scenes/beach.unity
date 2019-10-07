@@ -1406,7 +1406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394626157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 85.48, y: -0.16, z: -1}
+  m_LocalPosition: {x: 44.5, y: -0.16, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1436,7 +1436,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 3}
+  m_Size: {x: 6, y: 3}
   m_EdgeRadius: 0
 --- !u!1 &419940438
 GameObject:
@@ -3229,7 +3229,7 @@ GameObject:
   - component: {fileID: 1044142101}
   m_Layer: 0
   m_Name: Bus
-  m_TagString: Untagged
+  m_TagString: Services
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3290,7 +3290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044142094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.28, y: -0.05, z: 0}
+  m_LocalPosition: {x: -22.3, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3328,9 +3328,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1074270373}
+  busObject: {fileID: 1044142094}
+  name: Bus
+  messages:
+  - Bus ticket costs 3 $. (Press space to buy, backspace to decline)
+  - 
+  - I'm sorry, you don't have enough money for the ticket.
+  missionBriefinglength: 3
   speed: 5
   respawnPoint: {x: 0, y: 0, z: 0}
   nearBusStop: 0
+  i: 0
 --- !u!50 &1044142099
 Rigidbody2D:
   serializedVersion: 4

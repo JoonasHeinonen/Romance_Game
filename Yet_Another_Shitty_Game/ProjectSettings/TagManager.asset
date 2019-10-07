@@ -10,6 +10,7 @@ TagManager:
   - Coin
   - JumpTriggers
   - ArenaTriggers
+  - Services
   layers:
   - Default
   - TransparentFX

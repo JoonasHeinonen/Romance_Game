@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public LevelManager gameLevelManager;
 
     private int money = 0;
+    private int peopleInGroup = 1;
     private bool isNearCharacter = false;
     public bool isTalking;
 
@@ -42,6 +43,21 @@ public class PlayerController : MonoBehaviour
     public bool getNearBusStop()
     {
         return nearBusStop;
+    }
+
+    public int getMoney()
+    {
+        return money;
+    }
+
+    public int getPeopleInGroup()
+    {
+        return peopleInGroup;
+    }
+
+    public void incPeopleInGroup()
+    {
+        peopleInGroup++;
     }
 
     // Use this for initialization
@@ -152,7 +168,6 @@ public class PlayerController : MonoBehaviour
         }
         if (other.tag == "ArenaTriggers")
         {
-            Debug.Log("Homo!");
             if (movingToRight)
             {
                 fixMove = true;
@@ -173,10 +188,13 @@ public class PlayerController : MonoBehaviour
             isNearCharacter = true;
             Debug.Log("You are near " + other.gameObject.name + "!");
         }
-        if (other.gameObject.tag == "Characters")
+        if (other.gameObject.name == "Bus")
         {
-            isNearCharacter = true;
-            Debug.Log("You are near " + other.gameObject.name + "!");
+            if (bc.getStopped() == true)
+            {
+                isNearCharacter = true;
+                Debug.Log("You are near " + other.gameObject.name + "!");
+            }
         }
         if (other.gameObject.name == "Goofy")
         {
@@ -189,7 +207,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.name == "Bus_Stop")
         {
             nearBusStop = true;
-            Debug.Log("Is player near to bus stop: " + nearBusStop);
+            // Debug.Log("Is player near to bus stop: " + nearBusStop);
         }
     }
 
@@ -198,7 +216,12 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Characters")
         {
             isNearCharacter = false;
-            Debug.Log(isNearCharacter);
+            // Debug.Log(isNearCharacter);
+        }
+        if (other.gameObject.tag == "Services")
+        {
+            isNearCharacter = false;
+            // Debug.Log(isNearCharacter);
         }
         if (other.gameObject.name == "Goofy")
         {
@@ -207,8 +230,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.name == "Bus_Stop")
         {
             nearBusStop = false;
-            Debug.Log("Is player near to bus stop: " + nearBusStop);
-            bc.setSpeed(5f);
+            // Debug.Log("Is player near to bus stop: " + nearBusStop);
+            bc.setStopped(false);
         }
     }
 

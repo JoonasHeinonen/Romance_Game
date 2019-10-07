@@ -33,12 +33,14 @@ public class CharacterController : MonoBehaviour
 
     public int i;
 
-    PlayerController pn;
+    PlayerController pc;
+    BusController bc;
 
     // Start is called before the first frame update
     void Start()
     {
-        pn = GameObject.Find("Player").GetComponent<PlayerController>();
+        pc = GameObject.Find("Player").GetComponent<PlayerController>();
+        bc = GameObject.Find("Bus").GetComponent<BusController>();
         rigidBody = GetComponent<Rigidbody2D>();
         characterAnimation = GetComponent<Animator>();
         respawnPoint = transform.position;
@@ -47,7 +49,7 @@ public class CharacterController : MonoBehaviour
     public void setMissionComplete(int x)
     {
         isMissionComplete = true;
-        Debug.Log(characterName + "'s quest is complete! It is " + isMissionComplete +"!");
+        // Debug.Log(characterName + "'s quest is complete! It is " + isMissionComplete +"!");
         setI(x);
     }
 
@@ -165,6 +167,11 @@ public class CharacterController : MonoBehaviour
                 if (doesFollow)
                 {
                     willFollow = true;
+                    pc.incPeopleInGroup();
+                    int price = bc.getPrice();
+                    int newPrice = price * pc.getPeopleInGroup();
+                    bc.setPrice(newPrice);
+                    Debug.Log(pc.getPeopleInGroup() + " : " + newPrice);
                 }
             }
         }
