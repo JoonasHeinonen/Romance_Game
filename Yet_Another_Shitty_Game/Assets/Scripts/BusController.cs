@@ -20,6 +20,7 @@ public class BusController : MonoBehaviour
     private bool busStopped = false;
     bool interactingWithBus = false;
     bool triggered;
+    public bool boughtATicket = false;
 
     private string text;
 
@@ -37,20 +38,25 @@ public class BusController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (boughtATicket == false) { 
         // Debug.Log(pc.getPeopleInGroup() + "Price of Tickets: " + price + "$");
-        if (busStopped == false)
-        {
-            if (speed <= 5f)
+            if (busStopped == false)
             {
-                speed += 0.05f;
-            }
-            if (movement > 0f)
-            {
-                rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
-                transform.localScale = new Vector2(1f, 1f);
-            } else
-            {
-                rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
+                if (busStopped == false)
+                {
+                    if (speed <= 5f)
+                    {
+                        speed += 0.05f;
+                    }
+                }
+                if (movement > 0f)
+                {
+                    rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
+                    transform.localScale = new Vector2(1f, 1f);
+                } else
+                {
+                    rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
+                }
             }
         }
     }
@@ -109,11 +115,21 @@ public class BusController : MonoBehaviour
                         i = i + 1;
                     }
                 }
+                if (Input.GetKeyUp(KeyCode.Y))
+                {
+                    Debug.Log("Hop aboard!");
+                    pc.decMoney(price);
+                    boughtATicket = true;
+                } else if (Input.GetKeyUp(KeyCode.N) && interactingWithBus == true)
+                {
+                    i = 0;
+                    interactingWithBus = false;
+                }
                 text = messages[i];
                 GUI.contentColor = Color.black;
                 GUI.Label(new Rect(10, 400, textSize.x, textSize.y), text);
             }
-            if (Input.GetKeyDown("return") && interactingWithBus == false && triggered == true)
+            if (Input.GetKeyDown("return") && interactingWithBus == false && triggered == true && boughtATicket == false)
             {
                 interactingWithBus = true;
             }
@@ -137,8 +153,13 @@ public class BusController : MonoBehaviour
         }
         if (other.gameObject.name == "Player")
         {
-            setStopped(false);
             triggered = false;
+
+            if (pc.getNearBusStop() == true)
+            {
+                setStopped(false);
+            }
+
             // Debug.Log(getStopped());
         }
     }

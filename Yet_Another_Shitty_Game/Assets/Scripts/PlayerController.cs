@@ -50,6 +50,11 @@ public class PlayerController : MonoBehaviour
         return money;
     }
 
+    public void decMoney(int m)
+    {
+        money -= m;
+    }
+
     public int getPeopleInGroup()
     {
         return peopleInGroup;

@@ -11,6 +11,8 @@ TagManager:
   - JumpTriggers
   - ArenaTriggers
   - Services
+  - MenuBack
+  - MenuBG
   layers:
   - Default
   - TransparentFX
@@ -23,8 +25,8 @@ TagManager:
   - Ground
   - Characters
   - Player
-  - 
-  - 
+  - MenuBack
+  - MenuBG
   - 
   - 
   - 

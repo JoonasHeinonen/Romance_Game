@@ -3192,6 +3192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnDelay: 0
   gamePlayer: {fileID: 0}
+  black: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!4 &997412282
 Transform:
   m_ObjectHideFlags: 0
@@ -3338,6 +3340,7 @@ MonoBehaviour:
   speed: 5
   respawnPoint: {x: 0, y: 0, z: 0}
   nearBusStop: 0
+  boughtATicket: 0
   i: 0
 --- !u!50 &1044142099
 Rigidbody2D:
