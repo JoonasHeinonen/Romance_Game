@@ -13,7 +13,7 @@ public class MotorOilScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -21,7 +21,6 @@ public class MotorOilScript : MonoBehaviour
         if (other.gameObject.name == "Player")
         {
             Debug.Log("You collected the motor oil!");
-            Destroy(gameObject);
         }
     }
 }

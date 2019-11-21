@@ -23,11 +23,8 @@ public class CoinScript : MonoBehaviour
     {
         if (other.gameObject.name == "Player")
         {
-            Debug.Log("You collected a coin with the value of " +
-            valueOfACoin + "!");
             Destroy(gameObject);
             score = score + valueOfACoin;
-            Debug.Log("Your current score: " + score);
         }
     }
 }

@@ -2037,7 +2037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1074270373}
   character: {fileID: 585824199}
-  characterName: Roxanne
+  characterName: Emily
   messages:
   - Hi, Maxie!
   - 
@@ -2108,7 +2108,7 @@ SpriteRenderer:
   m_SortingLayerID: 940182859
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4030220308554d64490b86d01b8e95c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62fadcc69917073488d9b7e0fab6abe8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2395,7 +2395,7 @@ PrefabInstance:
     - target: {fileID: 3322672864759524548, guid: 7dfc110487e4d8845a3ff4a4a99ed596,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.67
+      value: 28.5
       objectReference: {fileID: 0}
     - target: {fileID: 3322672864759524548, guid: 7dfc110487e4d8845a3ff4a4a99ed596,
         type: 3}
@@ -2455,7 +2455,7 @@ PrefabInstance:
     - target: {fileID: 3322672864759524551, guid: 7dfc110487e4d8845a3ff4a4a99ed596,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dfc110487e4d8845a3ff4a4a99ed596, type: 3}
@@ -3292,7 +3292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044142094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.3, y: -0.05, z: 0}
+  m_LocalPosition: {x: -24.3, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3333,7 +3333,7 @@ MonoBehaviour:
   busObject: {fileID: 1044142094}
   name: Bus
   messages:
-  - Bus ticket costs 3 $. (Press space to buy, backspace to decline)
+  - 
   - 
   - I'm sorry, you don't have enough money for the ticket.
   missionBriefinglength: 3
@@ -3673,6 +3673,7 @@ MonoBehaviour:
   gameLevelManager: {fileID: 0}
   isTalking: 0
   bus: {fileID: 1044142094}
+  questItem: {fileID: 1651410867}
   timeLeft: 0.5
 --- !u!95 &1074270379
 Animator:
@@ -5043,7 +5044,7 @@ GameObject:
   - component: {fileID: 1651410872}
   m_Layer: 0
   m_Name: Motor_oil
-  m_TagString: Untagged
+  m_TagString: Collectables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5149,7 +5150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1651410867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.9, y: -2.48, z: 0}
+  m_LocalPosition: {x: 40, y: -2.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7467,7 +7468,7 @@ PrefabInstance:
     - target: {fileID: 29258838636428937, guid: d5aff86b6a9754644b51acce38ab7783,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5aff86b6a9754644b51acce38ab7783, type: 3}

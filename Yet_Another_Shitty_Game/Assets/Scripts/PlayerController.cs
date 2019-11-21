@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool nearBusStop = false;
 
     public GameObject bus;
+    public GameObject questItem;
 
     CharacterController gn;
     BusController bc;
@@ -79,6 +80,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentMission == "Get motor oil!")
+        {
+            questItem.SetActive(true);
+        } else
+        {
+            questItem.SetActive(false);
+        }
         if (timeLeft <= 0f)
         {
             fixMove = false;
@@ -105,6 +113,10 @@ public class PlayerController : MonoBehaviour
         movement = Input.GetAxis("Horizontal");
         if (isTalking == false && fixMove == false)
         {
+            if (Input.GetKeyDown("return") && isNearCharacter)
+            {
+                isTalking = true;
+            }
             if (movement > 0f)
             {
                 rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
@@ -130,17 +142,16 @@ public class PlayerController : MonoBehaviour
             playerAnimation.SetFloat("Speed", Mathf.Abs(rigidBody.velocity.x));
             playerAnimation.SetBool("OnGround", isTouchingGround);
         }
-        if (Input.GetKeyDown("return") && isNearCharacter)
-        {
-            isTalking = true;
-        }
         if (Input.GetKeyDown("backspace") && isTalking == true)
         {
-            isTalking = false;
             if (isNearGoofy)
             {
                 talkedToGoofy = true;
             }
+        }
+        if (Input.GetKeyDown("backspace"))
+        {
+            isTalking = false;
         }
         if (isNearGoofy == true && talkedToGoofy == true && isGoofyQuestCompleted == false)
         {
@@ -154,11 +165,12 @@ public class PlayerController : MonoBehaviour
         {
             hasMotorOil = false;
             isGoofyQuestCompleted = true;
-            succeededMissions++;
+            success();
             money += 10;
             currentMission = "";
             gn.setMissionComplete(8);
         }
+        Debug.Log("Is talking to anyone: " + isTalking);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -187,19 +199,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             money++;
+            SoundManagerScript.PlaySound("coin");
         }
         if (other.gameObject.tag == "Characters")
         {
             isNearCharacter = true;
-            Debug.Log("You are near " + other.gameObject.name + "!");
-        }
-        if (other.gameObject.name == "Bus")
-        {
-            if (bc.getStopped() == true)
-            {
-                isNearCharacter = true;
-                Debug.Log("You are near " + other.gameObject.name + "!");
-            }
         }
         if (other.gameObject.name == "Goofy")
         {
@@ -207,12 +211,12 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.name == "Motor_oil")
         {
+            SoundManagerScript.PlaySound("questitem");
             hasMotorOil = true;
         }
         if (other.gameObject.name == "Bus_Stop")
         {
             nearBusStop = true;
-            // Debug.Log("Is player near to bus stop: " + nearBusStop);
         }
     }
 
@@ -221,12 +225,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Characters")
         {
             isNearCharacter = false;
-            // Debug.Log(isNearCharacter);
-        }
-        if (other.gameObject.tag == "Services")
-        {
-            isNearCharacter = false;
-            // Debug.Log(isNearCharacter);
         }
         if (other.gameObject.name == "Goofy")
         {
@@ -235,9 +233,14 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.name == "Bus_Stop")
         {
             nearBusStop = false;
-            // Debug.Log("Is player near to bus stop: " + nearBusStop);
             bc.setStopped(false);
         }
+    }
+
+    void success()
+    {
+        succeededMissions++;
+        SoundManagerScript.PlaySound("questcomplete");
     }
 
     void OnGUI()
@@ -247,6 +250,6 @@ public class PlayerController : MonoBehaviour
         GUI.contentColor = Color.black;
         GUI.Label(new Rect(10, 10, textSize.x, textSize.y), text);
         GUI.Label(new Rect(10, 26, 500, textSize.y), "Succeeded missions: " + succeededMissions);
-        GUI.Label(new Rect(10, 42, 500, textSize.y), "Money: " + money);
+        GUI.Label(new Rect(10, 42, 500, textSize.y), money + " $");
     }
 }

@@ -170,6 +170,7 @@ public class CharacterController : MonoBehaviour
                     pc.incPeopleInGroup();
                     int price = bc.getPrice();
                     int newPrice = price * pc.getPeopleInGroup();
+                    Debug.Log("Current price of bus tickets as they should be: " + newPrice);
                     bc.setPrice(newPrice);
                     Debug.Log(pc.getPeopleInGroup() + " : " + newPrice);
                 }

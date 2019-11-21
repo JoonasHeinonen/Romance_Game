@@ -38,6 +38,7 @@ public class BusController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        messages[0] = "Bus ticket costs " + getPrice() + ".00 $. (Press space to buy, backspace to decline)";
         if (boughtATicket == false) { 
         // Debug.Log(pc.getPeopleInGroup() + "Price of Tickets: " + price + "$");
             if (busStopped == false)
